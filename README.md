@@ -7,7 +7,7 @@ Python_Basic_Study.md
 
 ## 내용 구조 (GitHub용 Markdown)
 
-```markdown
+markdown
 # 🐍 Python 기본 학습 정리
 
 ---
