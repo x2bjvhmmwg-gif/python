@@ -4,7 +4,8 @@
 ## 1️⃣ Python 시작과 환경 설정
 - Python은 **인터프리터 언어** → 한 줄씩 바로 실행 가능
 - **터미널**에서 실행:  
-  ```bash
+  ```
+  bash
   python
 ````
 
@@ -12,7 +13,8 @@
 * 종료: `exit()`
 * **가상 환경 생성**:
 
-  ```bash
+  ```
+  bash
   python -m venv 폴더명
   ```
 
@@ -20,7 +22,8 @@
   * 비활성화: `deactivate`
 * **주피터 설치 및 실행**:
 
-  ```bash
+  ```
+  bash
   pip install jupyter
   jupyter notebook
   ```
