@@ -1,10 +1,8 @@
-
 ---
-
 
 # Python 기초 총정리 (입문 ~ 핵심 문법)
 
-> Python 실행 환경부터
+> Python 실행 환경부터  
 > 자료형, 비교, 연산, 제어문, 반복문, 함수, 자주 쓰는 코드까지 정리
 
 ---
@@ -33,14 +31,19 @@
 
 ## 1. Python 개요
 
-* 인터프리터 언어 (한 줄씩 즉시 실행)
-* 동적 타입 언어
-* 들여쓰기(indent)가 문법
+Python은 **사람이 읽기 쉬운 문법**을 목표로 만들어진 언어이다.
+
+* 인터프리터 언어  
+  → 코드를 한 줄씩 바로 실행한다.
+* 동적 타입 언어  
+  → 변수 선언 시 자료형을 미리 정하지 않는다.
+* 들여쓰기(indent)가 문법  
+  → 중괄호 `{}` 대신 들여쓰기로 코드 블록을 구분한다.
 
 ```bash
 python
 exit()
-```
+````
 
 ---
 
@@ -48,13 +51,16 @@ exit()
 
 ## 2. 실행 환경과 가상환경
 
+가상환경은 **프로젝트마다 패키지를 독립적으로 관리**하기 위해 사용한다.
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
 deactivate
 ```
 
-* 프로젝트별 패키지 독립 관리
+* `venv` 폴더 안에 해당 프로젝트 전용 Python 환경 생성
+* 다른 프로젝트와 라이브러리 충돌 방지
 
 ---
 
@@ -62,14 +68,16 @@ deactivate
 
 ## 3. Jupyter Notebook
 
+Jupyter Notebook은 **학습과 실습에 최적화된 환경**이다.
+
 ```bash
 pip install jupyter
 jupyter notebook
 ```
 
-* 셀 단위 실행
-* `.ipynb`는 GitHub에서 미리보기 가능
-* 종료: `Ctrl + C`
+* 셀 단위로 코드 실행 가능
+* 결과를 바로 확인 가능
+* `.ipynb` 파일은 GitHub에서 바로 미리보기 가능
 
 ---
 
@@ -77,25 +85,57 @@ jupyter notebook
 
 ## 4. 자료형(DataType)
 
+Python의 모든 값은 **자료형(Type)** 을 가진다.
+
 ### 숫자형
 
-* int, float, complex
+* `int` : 정수
+* `float` : 실수
+* `complex` : 복소수
 
-### 불리언
+```python
+a = 10
+b = 3.14
+```
 
-* True / False (대문자 필수)
+### 불리언(Boolean)
 
-### 시퀀스
+```python
+True
+False
+```
 
-* str, list, tuple
+* 반드시 대문자로 작성
+* 조건문의 판단 기준으로 사용
+
+### 시퀀스 타입
+
+* `str` : 문자열
+* `list` : 리스트 (변경 가능)
+* `tuple` : 튜플 (변경 불가)
+
+```python
+text = "Hello"
+arr = [1, 2, 3]
+```
 
 ### 집합 / 딕셔너리
 
-* set, dict
+* `set` : 중복 없는 집합
+* `dict` : key-value 구조
+
+```python
+user = {"name": "Kim", "age": 20}
+```
 
 ### None
 
-* 값이 없음 (`NoneType`)
+```python
+a = None
+```
+
+* 값이 없음을 의미
+* JavaScript의 `null` 과 유사
 
 ---
 
@@ -107,6 +147,8 @@ jupyter notebook
 10 == 10.0                 # True
 type(10) == type(10.0)     # False
 ```
+
+* 값은 같지만 자료형은 다르다
 
 ```python
 True == 1                  # True
@@ -126,22 +168,36 @@ None is None               # True
 
 ## 6. 연산자
 
-### 산술
+### 산술 연산자
 
 ```python
 +, -, *, /, %, **
 ```
 
-### 비교
+* `/` : 나누기 (결과는 실수)
+* `//` : 몫
+* `%` : 나머지
+* `**` : 거듭제곱
+
+```python
+5 ** 2   # 25
+```
+
+### 비교 연산자
 
 ```python
 ==, !=, <, >, <=, >=
 ```
 
-### 논리
+### 논리 연산자
 
 ```python
 and, or, not
+```
+
+```python
+True or False   # True
+not True        # False
 ```
 
 ---
@@ -149,6 +205,8 @@ and, or, not
 <a id="condition"></a>
 
 ## 7. 조건문
+
+조건에 따라 **실행 흐름을 나눈다**.
 
 ```python
 if x > 0:
@@ -159,9 +217,13 @@ else:
     print("음수")
 ```
 
+### 한 줄 조건문
+
 ```python
 if x > 0: print("양수")
 ```
+
+* 코드가 짧을 때만 사용 권장
 
 ---
 
@@ -169,24 +231,36 @@ if x > 0: print("양수")
 
 ## 8. 반복문
 
+### for 문
+
 ```python
 for i in [1, 2, 3, 4]:
     print(i)
 ```
+
+* 리스트 안의 값이 하나씩 `i`에 들어간다
+
+### range()
 
 ```python
 for i in range(5):
     print(i)
 ```
 
-* Python에는 `of` 없음
-* iterable을 직접 순회
+* `range(시작, 끝, 증가)`
+
+### Python에 `of`가 없는 이유
+
+* Python은 `in` 하나로 모든 반복을 표현
+* iterable(순회 가능한 객체)을 직접 순회
 
 ---
 
 <a id="function"></a>
 
 ## 9. 함수(Function)
+
+함수는 **코드를 묶어서 재사용**하기 위한 문법이다.
 
 ```python
 def add(a, b):
@@ -198,7 +272,7 @@ def hello(name="World"):
     print(name)
 ```
 
-* return이 없으면 `None`
+* `return`이 없으면 자동으로 `None` 반환
 
 ---
 
@@ -207,7 +281,14 @@ def hello(name="World"):
 ## 10. 자주 쓰는 내장 함수
 
 ```python
-len(), type(), range(), print(), input()
+len()      # 길이
+type()     # 자료형 확인
+range()    # 반복 범위
+print()    # 출력
+input()    # 입력
+```
+
+```python
 sum(), max(), min(), sorted()
 ```
 
@@ -220,19 +301,22 @@ sum(), max(), min(), sorted()
 ### 문자열
 
 ```python
-upper(), lower(), split(), replace()
+upper(), lower()
+split(), replace()
 ```
 
 ### 리스트
 
 ```python
-append(), remove(), pop(), sort()
+append(), remove()
+pop(), sort()
 ```
 
 ### 딕셔너리
 
 ```python
-keys(), values(), items(), get()
+keys(), values()
+items(), get()
 ```
 
 ---
@@ -245,6 +329,8 @@ keys(), values(), items(), get()
 x = input("숫자 입력: ")
 x = int(x)
 ```
+
+* `input()`의 결과는 항상 문자열
 
 ```python
 str(), int(), float(), bool()
@@ -262,7 +348,7 @@ print(a)         # NameError
 10 / 0           # ZeroDivisionError
 ```
 
-* 에러 메시지를 읽는 습관이 중요
+* 에러 메시지를 읽는 습관이 매우 중요
 
 ---
 
@@ -279,6 +365,7 @@ print(a)         # NameError
 
 * 변수명: snake_case
 * 들여쓰기: 4칸
+* 가독성을 최우선으로 작성
 
 ---
 
@@ -292,11 +379,11 @@ __pycache__/
 ```
 
 * `.md` + `.ipynb` 함께 업로드 추천
+* 학습 과정 커밋도 충분히 가치 있음
 
 ---
 
+```
 
 
----
-
-
+```
