@@ -2,6 +2,8 @@
 ---
 
 
+---
+
 # Python 기초 총정리 (입문 ~ 핵심 문법)
 
 > Python 실행 환경부터
@@ -9,29 +11,31 @@
 
 ---
 
-## 📑 목차
+## 목차
 
-1. [Python 개요](#1-python-개요)
-2. [실행 환경 & 가상환경](#2-실행-환경--가상환경)
-3. [Jupyter Notebook](#3-jupyter-notebook)
-4. [자료형(DataType)](#4-자료형datatype)
-5. [자료형 비교](#5-자료형-비교)
-6. [연산자](#6-연산자)
-7. [조건문](#7-조건문)
-8. [반복문](#8-반복문)
-9. [함수(Function)](#9-함수function)
-10. [자주 쓰는 내장 함수](#10-자주-쓰는-내장-함수)
-11. [자료형별 주요 메서드](#11-자료형별-주요-메서드)
-12. [입력과 형 변환](#12-입력과-형-변환)
-13. [에러와 예외 기초](#13-에러와-예외-기초)
-14. [주석과 코드 스타일](#14-주석과-코드-스타일)
-15. [GitHub 업로드 팁](#15-github-업로드-팁)
+* [Python 개요](#python-overview)
+* [실행 환경과 가상환경](#environment)
+* [Jupyter Notebook](#jupyter)
+* [자료형(DataType)](#datatype)
+* [자료형 비교](#type-compare)
+* [연산자](#operator)
+* [조건문](#condition)
+* [반복문](#loop)
+* [함수(Function)](#function)
+* [자주 쓰는 내장 함수](#builtin)
+* [자료형별 주요 메서드](#methods)
+* [입력과 형 변환](#input-casting)
+* [에러와 예외 기초](#error)
+* [주석과 코드 스타일](#style)
+* [GitHub 업로드 팁](#github)
 
 ---
 
-## 1️⃣ Python 개요
+<a id="python-overview"></a>
 
-* 인터프리터 언어 (한 줄씩 실행)
+## 1. Python 개요
+
+* 인터프리터 언어 (한 줄씩 즉시 실행)
 * 동적 타입 언어
 * 들여쓰기(indent)가 문법
 
@@ -42,7 +46,9 @@ exit()
 
 ---
 
-## 2️⃣ 실행 환경 & 가상환경
+<a id="environment"></a>
+
+## 2. 실행 환경과 가상환경
 
 ```bash
 python -m venv venv
@@ -50,11 +56,13 @@ venv\Scripts\activate
 deactivate
 ```
 
-* 프로젝트별 독립 환경 관리
+* 프로젝트별 패키지 독립 관리
 
 ---
 
-## 3️⃣ Jupyter Notebook
+<a id="jupyter"></a>
+
+## 3. Jupyter Notebook
 
 ```bash
 pip install jupyter
@@ -62,67 +70,63 @@ jupyter notebook
 ```
 
 * 셀 단위 실행
-* `.ipynb` → GitHub 미리보기 가능
+* `.ipynb`는 GitHub에서 미리보기 가능
 * 종료: `Ctrl + C`
 
 ---
 
-## 4️⃣ 자료형(DataType)
+<a id="datatype"></a>
+
+## 4. 자료형(DataType)
 
 ### 숫자형
 
-```python
-int, float, complex
-```
+* int, float, complex
 
 ### 불리언
 
-```python
-True, False
-```
+* True / False (대문자 필수)
 
 ### 시퀀스
 
-```python
-str, list, tuple
-```
+* str, list, tuple
 
 ### 집합 / 딕셔너리
 
-```python
-set, dict
-```
+* set, dict
 
 ### None
 
-```python
-None
-```
+* 값이 없음 (`NoneType`)
 
 ---
 
-## 5️⃣ 자료형 비교
+<a id="type-compare"></a>
+
+## 5. 자료형 비교
 
 ```python
-10 == 10.0          # True
-type(10) == type(10.0)  # False
+10 == 10.0                 # True
+type(10) == type(10.0)     # False
 ```
 
 ```python
-True == 1           # True
-type(True) == type(1)   # False
+True == 1                  # True
+type(True) == type(1)      # False
 ```
 
 ```python
-None is None        # True
+None is None               # True
 ```
 
 * `==` : 값 비교
-* `is` : 객체 비교
+* `is` : 객체(주소) 비교
 
 ---
 
-## 6️⃣ 연산자
+<a id="operator"></a>
+
+## 6. 연산자
 
 ### 산술
 
@@ -144,7 +148,9 @@ and, or, not
 
 ---
 
-## 7️⃣ 조건문
+<a id="condition"></a>
+
+## 7. 조건문
 
 ```python
 if x > 0:
@@ -161,10 +167,12 @@ if x > 0: print("양수")
 
 ---
 
-## 8️⃣ 반복문
+<a id="loop"></a>
+
+## 8. 반복문
 
 ```python
-for i in [1, 2, 3]:
+for i in [1, 2, 3, 4]:
     print(i)
 ```
 
@@ -178,7 +186,9 @@ for i in range(5):
 
 ---
 
-## 9️⃣ 함수(Function)
+<a id="function"></a>
+
+## 9. 함수(Function)
 
 ```python
 def add(a, b):
@@ -190,32 +200,24 @@ def hello(name="World"):
     print(name)
 ```
 
-* return 없으면 `None`
+* return이 없으면 `None`
 
 ---
 
-## 10️⃣ 자주 쓰는 내장 함수
+<a id="builtin"></a>
+
+## 10. 자주 쓰는 내장 함수
 
 ```python
-len()
-type()
-range()
-print()
-input()
-sum()
-max()
-min()
-sorted()
-```
-
-```python
-len([1,2,3])      # 3
-sorted([3,1,2])   # [1,2,3]
+len(), type(), range(), print(), input()
+sum(), max(), min(), sorted()
 ```
 
 ---
 
-## 11️⃣ 자료형별 주요 메서드
+<a id="methods"></a>
+
+## 11. 자료형별 주요 메서드
 
 ### 문자열
 
@@ -237,7 +239,9 @@ keys(), values(), items(), get()
 
 ---
 
-## 12️⃣ 입력과 형 변환
+<a id="input-casting"></a>
+
+## 12. 입력과 형 변환
 
 ```python
 x = input("숫자 입력: ")
@@ -250,28 +254,23 @@ str(), int(), float(), bool()
 
 ---
 
-## 13️⃣ 에러와 예외 기초
+<a id="error"></a>
+
+## 13. 에러와 예외 기초
 
 ```python
-# TypeError
-"10" + 10
+"10" + 10        # TypeError
+print(a)         # NameError
+10 / 0           # ZeroDivisionError
 ```
 
-```python
-# NameError
-print(a)
-```
-
-```python
-# ZeroDivisionError
-10 / 0
-```
-
-에러 메시지를 **읽는 습관**이 중요
+* 에러 메시지를 읽는 습관이 중요
 
 ---
 
-## 14️⃣ 주석과 코드 스타일
+<a id="style"></a>
+
+## 14. 주석과 코드 스타일
 
 ```python
 # 한 줄 주석
@@ -285,7 +284,9 @@ print(a)
 
 ---
 
-## 15️⃣ GitHub 업로드 팁
+<a id="github"></a>
+
+## 15. GitHub 업로드 팁
 
 ```gitignore
 venv/
