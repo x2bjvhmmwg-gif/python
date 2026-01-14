@@ -1,28 +1,34 @@
 
-# Python 기초 총정리 (입문 ~ 핵심 문법)
+````
+# Python 기초 총정리  
+(환경 설정 → 자료형 → 연산 → 제어문 → 반복문 → 인덱싱/슬라이싱 → 함수 → 내장함수)
 
-> Python 실행 환경부터  
-> 자료형, 비교, 연산, 제어문, 반복문, 함수, 자주 쓰는 코드까지 정리
+> Python을 사용하기 위한 진입 과정부터  
+> 실제 많이 쓰는 문법과 개념을 학습 흐름에 맞게 정리
 
 ---
 
 ## 목차
 
-* [Python 개요](#python-overview)
-* [실행 환경과 가상환경](#environment)
-* [Jupyter Notebook](#jupyter)
-* [자료형(DataType)](#datatype)
-* [자료형 비교](#type-compare)
-* [연산자](#operator)
-* [조건문](#condition)
-* [반복문](#loop)
-* [함수(Function)](#function)
-* [자주 쓰는 내장 함수](#builtin)
-* [자료형별 주요 메서드](#methods)
-* [입력과 형 변환](#input-casting)
-* [에러와 예외 기초](#error)
-* [주석과 코드 스타일](#style)
-* [GitHub 업로드 팁](#github)
+- [Python 개요](#python-overview)
+- [Python 실행과 인터프리터](#interpreter)
+- [패키지 관리 (pip, uv)](#pip)
+- [가상환경 (venv)](#venv)
+- [Jupyter Notebook & Colab](#jupyter)
+- [자료형(DataType)](#datatype)
+- [자료형 비교](#type-compare)
+- [문자열 상세](#string)
+- [연산자](#operator)
+- [조건문](#condition)
+- [반복문](#loop)
+- [인덱싱(Indexing)](#indexing)
+- [슬라이싱(Slicing)](#slicing)
+- [함수(Function)](#function)
+- [자주 쓰는 내장 함수](#builtin)
+- [입력과 형 변환](#input)
+- [에러(Error) 기초](#error)
+- [주석과 코드 스타일](#style)
+- [GitHub 업로드 팁](#github)
 
 ---
 
@@ -30,59 +36,101 @@
 
 ## 1. Python 개요
 
-Python은 **사람이 읽기 쉬운 문법**을 목표로 만들어진 언어이다.
+Python은 **인터프리터 언어**로, 코드를 한 줄씩 바로 실행한다.
 
-* 인터프리터 언어  
-  → 코드를 한 줄씩 바로 실행한다.
-* 동적 타입 언어  
-  → 변수 선언 시 자료형을 미리 정하지 않는다.
-* 들여쓰기(indent)가 문법  
-  → 중괄호 `{}` 대신 들여쓰기로 코드 블록을 구분한다.
-
-```bash
-python
-exit()
-````
+- 실행 즉시 결과 확인 가능
+- 문법이 간결하고 가독성이 좋음
+- 들여쓰기(indent)가 문법의 일부
 
 ---
 
-<a id="environment"></a>
+<a id="interpreter"></a>
 
-## 2. 실행 환경과 가상환경
+## 2. Python 실행과 인터프리터
 
-가상환경은 **프로젝트마다 패키지를 독립적으로 관리**하기 위해 사용한다.
+터미널에서 Python을 실행하면 **바로 입력 가능한 영역(REPL)** 이 열린다.
+
+```bash
+python
+````
+
+* 현재 설치된 Python 버전이 출력됨
+  (예: Python 3.12.x)
+* `exit()` 로 종료 가능
+
+---
+
+<a id="pip"></a>
+
+## 3. 패키지 관리 (pip, uv)
+
+```bash
+pip list
+```
+
+* 현재 컴퓨터 또는 가상환경에 설치된 패키지 목록 확인
+
+`pip`, `uv` 가 보이는 이유:
+
+* Python 패키지를 설치/관리하기 위한 도구
+* Python 설치 시 기본 포함되는 경우가 많음
+
+---
+
+<a id="venv"></a>
+
+## 4. 가상환경 (venv)
+
+가상환경은 **프로젝트별 독립된 Python 공간**이다.
 
 ```bash
 python -m venv venv
+```
+
+### 활성화 / 비활성화
+
+```bash
 venv\Scripts\activate
 deactivate
 ```
 
-* `venv` 폴더 안에 해당 프로젝트 전용 Python 환경 생성
-* 다른 프로젝트와 라이브러리 충돌 방지
+* 프로젝트마다 라이브러리 충돌 방지
+* Jupyter도 가상환경 안에 설치하는 것이 좋음
 
 ---
 
 <a id="jupyter"></a>
 
-## 3. Jupyter Notebook
+## 5. Jupyter Notebook & Colab
 
-Jupyter Notebook은 **학습과 실습에 최적화된 환경**이다.
+### Jupyter Notebook
 
 ```bash
 pip install jupyter
 jupyter notebook
 ```
 
-* 셀 단위로 코드 실행 가능
-* 결과를 바로 확인 가능
-* `.ipynb` 파일은 GitHub에서 바로 미리보기 가능
+* 셀 단위 실행
+* 입력한 내용이 파일로 저장됨
+* 종료: `Ctrl + C`
+
+### Google Colab
+
+* Jupyter와 UI 유사
+* Google Drive에 저장
+* 주소 공유가 편리
+* 런타임 유형 변경 가능
+
+GitHub:
+
+* `.ipynb` 파일은 **실행 없이 결과 미리보기 가능**
+* 코드 클릭 시 텍스트로 확인 가능
 
 ---
 
 <a id="datatype"></a>
 
-## 4. 자료형(DataType)
+## 6. 자료형(DataType)
 
 Python의 모든 값은 **자료형(Type)** 을 가진다.
 
@@ -90,47 +138,82 @@ Python의 모든 값은 **자료형(Type)** 을 가진다.
 
 * `int` : 정수
 * `float` : 실수
-* `complex` : 복소수
 
 ```python
 a = 10
 b = 3.14
 ```
 
-### 불리언(Boolean)
+---
+
+### 문자열 (str)
+
+```python
+"hello"
+'hello'
+"""
+여러 줄 문자열
+"""
+```
+
+* `"` 와 `'` 는 동일한 문자열 타입
+* 문자열은 **수정 불가 (immutable)**
+
+특수 문자:
+
+* `\n` : 줄 바꿈
+* `\"` : 문자열 안에 큰따옴표 사용
+
+---
+
+### 불리언 (bool)
 
 ```python
 True
 False
 ```
 
-* 반드시 대문자로 작성
-* 조건문의 판단 기준으로 사용
+* 반드시 대문자
+* 조건 판단에 사용
 
-### 시퀀스 타입
+---
 
-* `str` : 문자열
-* `list` : 리스트 (변경 가능)
-* `tuple` : 튜플 (변경 불가)
+### 리스트 (list)
 
 ```python
-text = "Hello"
-arr = [1, 2, 3]
+[1, 2, 3]
 ```
 
-### 집합 / 딕셔너리
+* 순서 있음
+* 값 변경 가능
 
-* `set` : 중복 없는 집합
-* `dict` : key-value 구조
+---
+
+### 튜플 (tuple)
 
 ```python
-user = {"name": "Kim", "age": 20}
+(1, 2, 3)
 ```
+
+* 순서 있음
+* 값 변경 불가
+
+---
+
+### 딕셔너리 (dict)
+
+```python
+{"name": "Kim", "age": 20}
+```
+
+* key-value 구조
+
+---
 
 ### None
 
 ```python
-a = None
+None
 ```
 
 * 값이 없음을 의미
@@ -140,47 +223,56 @@ a = None
 
 <a id="type-compare"></a>
 
-## 5. 자료형 비교
+## 7. 자료형 비교
 
 ```python
-10 == 10.0                 # True
-type(10) == type(10.0)     # False
-```
-
-* 값은 같지만 자료형은 다르다
-
-```python
-True == 1                  # True
-type(True) == type(1)      # False
+10 == 10.0            # True
+type(10) == type(10.0)  # False
 ```
 
 ```python
-None is None               # True
+True == 1             # True
+type(True) == type(1)  # False
+```
+
+```python
+None is None          # True
 ```
 
 * `==` : 값 비교
-* `is` : 객체(주소) 비교
+* `is` : 객체 비교 (주소)
+
+---
+
+<a id="string"></a>
+
+## 8. 문자열 추가 설명
+
+```python
+print("문자" * 3)   # 문자문자문자
+```
+
+* `*` 는 문자열 반복
+* `"문자" + 10` 은 타입 불일치로 오류 발생
 
 ---
 
 <a id="operator"></a>
 
-## 6. 연산자
+## 9. 연산자
 
 ### 산술 연산자
 
 ```python
-+, -, *, /, %, **
++, -, *, /, %, **, //
 ```
 
-* `/` : 나누기 (결과는 실수)
+* `/` : 나누기 (실수 결과)
 * `//` : 몫
 * `%` : 나머지
 * `**` : 거듭제곱
 
-```python
-5 ** 2   # 25
-```
+---
 
 ### 비교 연산자
 
@@ -188,24 +280,21 @@ None is None               # True
 ==, !=, <, >, <=, >=
 ```
 
+---
+
 ### 논리 연산자
 
 ```python
 and, or, not
 ```
 
-```python
-True or False   # True
-not True        # False
-```
+* `not` 은 뒤의 값을 반대로 판단
 
 ---
 
 <a id="condition"></a>
 
-## 7. 조건문
-
-조건에 따라 **실행 흐름을 나눈다**.
+## 10. 조건문
 
 ```python
 if x > 0:
@@ -216,19 +305,17 @@ else:
     print("음수")
 ```
 
-### 한 줄 조건문
+한 줄 조건문도 가능:
 
 ```python
 if x > 0: print("양수")
 ```
 
-* 코드가 짧을 때만 사용 권장
-
 ---
 
 <a id="loop"></a>
 
-## 8. 반복문
+## 11. 반복문
 
 ### for 문
 
@@ -237,29 +324,57 @@ for i in [1, 2, 3, 4]:
     print(i)
 ```
 
-* 리스트 안의 값이 하나씩 `i`에 들어간다
-
-### range()
+* 리스트 안의 값이 하나씩 `i`에 들어감
 
 ```python
 for i in range(5):
     print(i)
 ```
 
-* `range(시작, 끝, 증가)`
+* Python에는 `of` 가 없음
+* iterable을 `in` 으로 직접 순회
 
-### Python에 `of`가 없는 이유
+---
 
-* Python은 `in` 하나로 모든 반복을 표현
-* iterable(순회 가능한 객체)을 직접 순회
+<a id="indexing"></a>
+
+## 12. 인덱싱 (Indexing)
+
+```python
+text = "Python"
+text[0]    # 'P'
+text[-1]   # 'n'
+```
+
+* 하나의 값 접근
+* 0부터 시작
+* 범위 초과 시 오류
+
+---
+
+<a id="slicing"></a>
+
+## 13. 슬라이싱 (Slicing)
+
+```python
+text[start:end:step]
+```
+
+```python
+text = "Python"
+text[0:3]     # 'Pyt'
+text[2:]      # 'thon'
+text[::-1]    # 'nohtyP'
+```
+
+* end는 포함되지 않음
+* 원본은 변경되지 않음
 
 ---
 
 <a id="function"></a>
 
-## 9. 함수(Function)
-
-함수는 **코드를 묶어서 재사용**하기 위한 문법이다.
+## 14. 함수(Function)
 
 ```python
 def add(a, b):
@@ -271,89 +386,53 @@ def hello(name="World"):
     print(name)
 ```
 
-* `return`이 없으면 자동으로 `None` 반환
+* return이 없으면 `None` 반환
 
 ---
 
 <a id="builtin"></a>
 
-## 10. 자주 쓰는 내장 함수
+## 15. 자주 쓰는 내장 함수
 
 ```python
-len()      # 길이
-type()     # 자료형 확인
-range()    # 반복 범위
-print()    # 출력
-input()    # 입력
-```
-
-```python
+len(), type(), range()
+print(), input()
 sum(), max(), min(), sorted()
+int(), float(), str(), bool()
 ```
 
 ---
 
-<a id="methods"></a>
+<a id="input"></a>
 
-## 11. 자료형별 주요 메서드
-
-### 문자열
-
-```python
-upper(), lower()
-split(), replace()
-```
-
-### 리스트
-
-```python
-append(), remove()
-pop(), sort()
-```
-
-### 딕셔너리
-
-```python
-keys(), values()
-items(), get()
-```
-
----
-
-<a id="input-casting"></a>
-
-## 12. 입력과 형 변환
+## 16. 입력과 형 변환
 
 ```python
 x = input("숫자 입력: ")
 x = int(x)
 ```
 
-* `input()`의 결과는 항상 문자열
-
-```python
-str(), int(), float(), bool()
-```
+* input 결과는 항상 문자열
 
 ---
 
 <a id="error"></a>
 
-## 13. 에러와 예외 기초
+## 17. 에러(Error) 기초
 
 ```python
-"10" + 10        # TypeError
-print(a)         # NameError
-10 / 0           # ZeroDivisionError
+"10" + 10      # TypeError
+print(a)       # NameError
+10 / 0         # ZeroDivisionError
 ```
 
-* 에러 메시지를 읽는 습관이 매우 중요
+* 에러 메시지를 읽는 습관 중요
 
 ---
 
 <a id="style"></a>
 
-## 14. 주석과 코드 스타일
+## 18. 주석과 코드 스타일
 
 ```python
 # 한 줄 주석
@@ -364,23 +443,22 @@ print(a)         # NameError
 
 * 변수명: snake_case
 * 들여쓰기: 4칸
-* 가독성을 최우선으로 작성
 
 ---
 
 <a id="github"></a>
 
-## 15. GitHub 업로드 팁
+## 19. GitHub 업로드 팁
 
 ```gitignore
 venv/
 __pycache__/
 ```
 
-* `.md` + `.ipynb` 함께 업로드 추천
-* 학습 과정 커밋도 충분히 가치 있음
+
+```
 
 
 
-
+다음 뭐 할지 말해줘.
 ```
